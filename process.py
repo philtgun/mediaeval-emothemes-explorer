@@ -16,7 +16,7 @@ def load_tags(path):
     return [tag.removeprefix('mood/theme---') for tag in tags]
 
 
-def main(groundtruth_file, tags_file, output_file, submission_dirs):
+def main(groundtruth_file, tags_file, output_file, submission_dirs, tags_sorted_file=None):
     groundtruth = np.load(str(groundtruth_file))
     tags = load_tags(tags_file)
 
@@ -48,10 +48,22 @@ def main(groundtruth_file, tags_file, output_file, submission_dirs):
 
     indices_ranked = np.argsort(overall_pr_aucs)
 
+    if tags_sorted_file is not None:
+        tags_sorted = load_tags(tags_sorted_file)
+        indices_tags = np.searchsorted(tags, tags_sorted)
+    else:
+        indices_tags = np.arange(len(tags))
+    print(indices_tags.shape)
+    print(indices_ranked.shape)
+    print(np.array(data).shape)
+    data = np.array(data)
+    data = data[indices_ranked, :]
+    data = data[:, indices_tags]
+
     plot_data = {
-        'x': tags,
+        'x': np.array(tags)[indices_tags].tolist(),
         'y': np.array(run_names)[indices_ranked].tolist(),
-        'z': np.array(data)[indices_ranked].tolist()
+        'z': data.tolist()
     }
 
     with open(output_file, 'w') as fp:
@@ -60,10 +72,11 @@ def main(groundtruth_file, tags_file, output_file, submission_dirs):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('groundtruth_file', help='NPY file containing groundtruth')
-    parser.add_argument('tags_file', help='TXT file containing list of tags')
-    parser.add_argument('output_file', help='Output JSON file')
+    parser.add_argument('groundtruth', help='NPY file containing groundtruth')
+    parser.add_argument('tags', help='TXT file containing list of tags')
+    parser.add_argument('output', help='Output JSON file')
     parser.add_argument('submission_dirs', nargs='+',
                         help='Directories and the years in the following format: <year> <dir> <year> <dir> ...')
+    parser.add_argument('--tags-sorted', help='TXT file with list of tags in order to appear')
     args = parser.parse_args()
-    main(args.groundtruth_file, args.tags_file, args.output_file, args.submission_dirs)
+    main(args.groundtruth, args.tags, args.output, args.submission_dirs, args.tags_sorted)
