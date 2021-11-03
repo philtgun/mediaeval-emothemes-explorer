@@ -14,6 +14,7 @@ def main(input_file: Path, output_file: Path) -> None:
     plt.figure(figsize=(20, 12))
     rcParams['font.family'] = 'serif'
     rcParams['font.serif'] = 'Times New Roman'
+    plt.tick_params(left=False, bottom=False)
     sns.heatmap(data['z'][::-1], xticklabels=data['x'], yticklabels=data['y'][::-1], cmap="YlGnBu_r")
     plt.savefig(output_file, bbox_inches='tight', dpi=150)
 
