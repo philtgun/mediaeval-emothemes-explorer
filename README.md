@@ -25,3 +25,9 @@ python process.py ../2020-Emotion-and-Theme-Recognition-in-Music-Task/src/ground
 cd site
 python -m http.server
 ```
+
+## Generating the figure
+```shell
+pip install seaborn matplotlib
+python export.py docs/data.json docs/figure.pdf
+```
