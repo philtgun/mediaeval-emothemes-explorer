@@ -17,7 +17,7 @@ python process.py ..\2020-Emotion-and-Theme-Recognition-in-Music-Task\src\ground
 
 Linux
 ```shell
-python process.py ../2020-Emotion-and-Theme-Recognition-in-Music-Task/src/groundtruth.npy ../mtg-jamendo-dataset/data/tags/moodtheme_split.txt docs/data.json 2019 ../2019-Emotion-and-Theme-Recognition-in-Music-Task/submissions 2020 ../2020-Emotion-and-Theme-Recognition-in-Music-Task/submissions --tags-sorted ../mtg-jamendo-dataset/data/tags/moodtheme_split_sorttracks.txt
+python process.py ../2020-Emotion-and-Theme-Recognition-in-Music-Task/src/groundtruth.npy ../mtg-jamendo-dataset/data/tags/moodtheme_split.txt docs/data.json 2019 ../2019-Emotion-and-Theme-Recognition-in-Music-Task/submissions 2020 ../2020-Emotion-and-Theme-Recognition-in-Music-Task/submissions 2021 ../2021-Emotion-and-Theme-Recognition-in-Music-Task/submissions --tags-sorted ../mtg-jamendo-dataset/data/tags/moodtheme_split_sorttracks.txt
 ```
 
 ## Testing

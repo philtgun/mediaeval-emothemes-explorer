@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // console.dir(data);
         Plotly.newPlot(plotElement, [data], {
             title: "PR-AUC values per tag for all submissions",
-            margin: {l: 320, b: 100, t: 40},
+            margin: {l: 380, b: 100, t: 40},
         }, {
             responsive: true,
         });
