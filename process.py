@@ -48,15 +48,16 @@ def main(groundtruth_file, tags_file, output_file, submission_dirs, tags_sorted_
 
     indices_ranked = np.argsort(overall_pr_aucs)
 
+    data = np.array(data)
     if tags_sorted_file is not None:
         tags_sorted = load_tags(tags_sorted_file)
         indices_tags = np.searchsorted(tags, tags_sorted)
     else:
-        indices_tags = np.arange(len(tags))
+        indices_tags = np.argsort(data.mean(axis=0))[::-1]
     print(indices_tags.shape)
     print(indices_ranked.shape)
     print(np.array(data).shape)
-    data = np.array(data)
+
     data = data[indices_ranked, :]
     data = data[:, indices_tags]
 

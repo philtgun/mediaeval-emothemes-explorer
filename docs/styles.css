@@ -1,3 +1,8 @@
 #plot {
     height: 1100px;
 }
+
+#spinner {
+    width: 5rem;
+    height: 5rem;
+}
